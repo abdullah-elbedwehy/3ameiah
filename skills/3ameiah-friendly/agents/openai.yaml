@@ -1,0 +1,4 @@
+interface:
+  display_name: "3ameiah Friendly"
+  short_description: "عامية مصرية دافية وقريبة من غير افتعال"
+  default_prompt: "استخدم $3ameiah-friendly ونفّذ الطلب ده بالمصري الدافي والقريب من غير حشو أو افتعال."

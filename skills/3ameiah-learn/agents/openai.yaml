@@ -1,0 +1,4 @@
+interface:
+  display_name: "3ameiah Learn"
+  short_description: "اعمل أو حسّن بروفايل بيتعلم أسلوبك مع الوقت"
+  default_prompt: "استخدم $3ameiah-learn عشان تعمل أو تحدّث بروفايل أسلوب مسمّى، ووجّهني لو مش عارف أبدأ."

@@ -1,0 +1,60 @@
+{
+  "name": "3ameiah",
+  "version": "0.1.0",
+  "description": "Simple Egyptian Arabic and Franco Agent Skills with reusable, continuously improving tone profiles.",
+  "type": "module",
+  "bin": {
+    "3ameiah": "bin/3ameiah.mjs",
+    "3ameiah-learn": "bin/3ameiah-learn.mjs",
+    "3ameiah-use": "bin/3ameiah-use.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "skills/",
+    "schemas/",
+    "docs/",
+    "README.md",
+    "INSTALL.md",
+    "INSTALL-FOR-AGENTS.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "node ./scripts/validate-repo.mjs",
+    "test": "node --test ./tests/*.test.mjs",
+    "test:python": "python3 -B -m unittest discover -s ./skills/3ameiah/scripts/tests -q",
+    "test:all": "npm run check && npm test && npm run test:python",
+    "prepack": "npm run test:all"
+  },
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "dependencies": {
+    "skills": "1.5.22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdullah-elbedwehy/3ameiah.git"
+  },
+  "homepage": "https://github.com/abdullah-elbedwehy/3ameiah#readme",
+  "bugs": {
+    "url": "https://github.com/abdullah-elbedwehy/3ameiah/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "arabic",
+    "egyptian-arabic",
+    "franco",
+    "arabizi",
+    "claude-code",
+    "codex"
+  ],
+  "author": "Abdullah Elbedwehy",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

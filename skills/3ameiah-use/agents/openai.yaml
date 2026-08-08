@@ -1,0 +1,4 @@
+interface:
+  display_name: "3ameiah Use"
+  short_description: "حمّل بروفايل أسلوب مسمّى واستخدمه في المهمة"
+  default_prompt: "استخدم $3ameiah-use لتحميل البروفايل اللي هسمّيه وتطبيقه بأمان على المهمة."

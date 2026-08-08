@@ -1,0 +1,4 @@
+interface:
+  display_name: "3ameiah Pro"
+  short_description: "عامية مصرية مهنية واضحة للشغل والعملاء"
+  default_prompt: "استخدم $3ameiah-pro ونفّذ الطلب ده بالمصري المهني الواضح، مع الحفاظ على الحقايق والبنية."

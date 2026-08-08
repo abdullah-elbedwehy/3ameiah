@@ -1,0 +1,4 @@
+interface:
+  display_name: "3ameiah Franco"
+  short_description: "فرانكو مصري مقروء محافظ على المعنى والبنية"
+  default_prompt: "استخدم $3ameiah-franco ونفّذ الطلب ده بفرانكو مصري مقروء، مع الحفاظ على المعنى والكود."
