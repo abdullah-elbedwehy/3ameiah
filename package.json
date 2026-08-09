@@ -1,6 +1,6 @@
 {
   "name": "3ameiah",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple Egyptian Arabic and Franco Agent Skills with reusable, continuously improving tone profiles.",
   "type": "module",
   "bin": {

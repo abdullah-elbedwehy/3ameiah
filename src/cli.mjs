@@ -162,14 +162,31 @@ async function learnCommand(argv, { stdout }) {
   else {
     stdout.write(`${result.action === "created" ? "Created" : "Updated"} profile '${result.profile.id}' (${result.profile.displayName}), revision ${result.profile.revision}.\n`);
     stdout.write(`Saved to ${result.path}\n`);
+    writeStyleprintSummary(result, stdout);
     const learned = result.profile.learningLog.at(-1)?.fields ?? [];
-    if (learned.length > 0 && learned.every((field) => ["likedSamples", "dislikedSamples"].includes(field))) {
-      stdout.write("Saved sample evidence only; the terminal did not infer tone rules from it.\n");
-      stdout.write(`Next in your agent: /3ameiah-learn ${result.profile.id} راجع العينات المحفوظة واقترح قواعد الأسلوب قبل ما تحفظها\n`);
+    if (learned.length > 0 && learned.every((field) => ["likedSamples", "dislikedSamples", "styleprint"].includes(field))) {
+      stdout.write("Measured the writing only; the terminal never infers tone rules, facts, or preferences from a sample.\n");
+      stdout.write(`Next in your agent: /3ameiah-learn ${result.profile.id} راجع الـ styleprint واقترح قواعد الأسلوب قبل ما تحفظها\n`);
     }
     stdout.write(`Activate it here with: npx 3ameiah use ${result.profile.id}\n`);
   }
   return 0;
+}
+
+function writeStyleprintSummary({ profile, measuredOnly = [] }, stdout) {
+  for (const { source, characters } of measuredOnly) {
+    stdout.write(`Measured '${source}' in full (${characters} characters); it is too large to store, so only the styleprint keeps it.\n`);
+  }
+  const styleprint = profile.styleprint;
+  if (!styleprint) return;
+  const { corpus, rhythm } = styleprint;
+  stdout.write(`Styleprint: ${corpus.words} words, ${corpus.sentences} sentences, ~${rhythm.wordsPerSentence} words per sentence.\n`);
+  const signature = [...styleprint.tics, ...styleprint.phrases]
+    .sort((left, right) => right.count - left.count)
+    .slice(0, 6)
+    .map((entry) => `${entry.text} (${entry.count})`);
+  if (signature.length > 0) stdout.write(`Recurring wording: ${signature.join("، ")}\n`);
+  stdout.write(`Kept ${styleprint.excerpts.length} excerpt(s), ${styleprint.openers.length} opener(s), ${styleprint.closers.length} closer(s).\n`);
 }
 
 async function useCommand(argv, { stdout }) {
@@ -304,7 +321,7 @@ Profile options:
   --about <text>         A style-relevant fact about you; repeat as needed
   --tone <text>          Short tone description
   --tone-file <path>     Read the tone description from a file
-  --from <path>          Add a local writing sample; repeat as needed
+  --from <path>          Add a local writing sample and measure its styleprint; repeat as needed
   --dislike <path>       Add an example that is not your style
   --audience <text>      Main audience
   --address <text>       Address convention, for example إنت or حضرتك
@@ -319,9 +336,17 @@ Profile options:
   --yes                  Use defaults without interactive questions
   --json                 Machine-readable output
 
+Styleprint:
+  Every --from sample is measured in full: recurring words and phrases, Egyptian discourse
+  markers, spelling choices, sentence rhythm, punctuation and emoji habits, plus a bounded
+  set of verbatim openers, closers, and representative excerpts. A file too large to store
+  is still measured; only its raw text is left out. The terminal measures and never infers
+  preferences, facts, or claims from what it read.
+
 Profile privacy:
   Profiles are stored globally in your private user config, never inside a repository.
-  Samples stay out of model context unless profile context is requested with --include-samples.
+  The styleprint travels with profile context so the voice can actually be reproduced.
+  Whole raw samples stay out of context unless requested with --include-samples.
 
 Convenience after a global npm install:
   3ameiah learn my-tone

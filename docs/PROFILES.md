@@ -65,7 +65,43 @@ Useful flags:
 --json                  machine-readable result
 ```
 
-The terminal CLI does not infer a voice from sample text. `--from` and `--dislike` archive evidence in the profile; add the extracted preferences explicitly with flags such as `--tone`, `--prefer`, and `--avoid`, or use `3ameiah-learn` inside an agent for sample-assisted learning.
+The terminal CLI measures sample text but never interprets it. `--from` and `--dislike` archive evidence and build the styleprint below; opinions about your voice are still yours to state with flags such as `--tone`, `--prefer`, and `--avoid`, or through `3ameiah-learn` inside an agent.
+
+## Styleprint
+
+A tone description tells a model what to aim for. A styleprint tells it what you actually write, so the output sounds like you instead of like a description of you.
+
+Every `--from` sample is measured in full and folded into one `styleprint`:
+
+| Field | What it records |
+|---|---|
+| `corpus` | samples, characters, words, sentences, paragraphs analysed |
+| `script` | Arabic and Latin letter share, and whether you write Franco |
+| `rhythm` | mean and median words per sentence, long-sentence share, sentences per paragraph |
+| `punctuation` | question, exclamation, ellipsis, `،` versus `,`, emoji density, elongation, laughter, tashkeel |
+| `words` | your most frequent words, with `count` and a `per1k` rate |
+| `phrases` | repeated 2–5 word phrases |
+| `tics` | Egyptian and Franco discourse markers you actually use |
+| `spellings` | forks you already settled, as `uses` over `over` |
+| `emoji` | which emoji, not just how many |
+| `openers` / `closers` | your real first and last lines |
+| `excerpts` | representative verbatim sentences to calibrate against |
+
+```bash
+npx 3ameiah learn creator --from ~/writing/newsletter.md --yes
+```
+
+```text
+Styleprint: 243 words, 34 sentences, ~7.15 words per sentence.
+Recurring wording: مش (8)، كتير (3)، كل يوم (3)، أصلا (2)، بقى (2)، بقول لك (2)
+Kept 20 excerpt(s), 8 opener(s), 8 closer(s).
+```
+
+Counting is normalized so `ة/ه` and `ى/ي` variants group together, while the spelling stored is the one you use most. Frequencies are reported both raw and per 1,000 words so a short sample and a long one stay comparable.
+
+A file larger than the 12,000-character sample limit is still measured in full; only its raw text is left out, and the CLI says so. Nothing is ever silently truncated.
+
+The styleprint is bounded by design: at most 30 words, 30 phrases, 20 tics, 20 spellings, 15 emoji, 8 openers, 8 closers, and 20 excerpts within 6,000 characters. Below roughly 40 words of evidence it stays `null` rather than guessing.
 
 ## Agent-assisted sample learning
 
@@ -90,7 +126,7 @@ Profiles deliberately live outside repositories:
 
 `THREEAMEIAH_CONFIG_DIR`, `XDG_CONFIG_HOME`, and `APPDATA` must be absolute paths when used. Managed profile directories and files may not be symlinks.
 
-There is intentionally no project-profile fallback in version 0.1. A downloaded repository cannot shadow your private profile or activate checked-in style instructions. For a project-specific voice, create a clearly named global profile such as `client-acme` and invoke it explicitly.
+There is intentionally no project-profile fallback. A downloaded repository cannot shadow your private profile or activate checked-in style instructions. For a project-specific voice, create a clearly named global profile such as `client-acme` and invoke it explicitly.
 
 ## Names and IDs
 
@@ -119,7 +155,7 @@ npx 3ameiah use --off
 
 ## Samples and model context
 
-Samples are stored locally at rest and capped at 12,000 combined characters. They are excluded from automatic profile context. The safe context includes only allowlisted profile facts and voice fields plus sample counts:
+Whole samples are stored locally at rest, capped at 12,000 combined characters, and excluded from automatic profile context. The styleprint is the deliberate exception: it is bounded, derived, and carried with the profile, because a voice cannot be reproduced from statistics that never reach the model. The safe context includes allowlisted profile facts, voice fields, the styleprint, and sample counts:
 
 ```bash
 npx 3ameiah profile context creator --json
@@ -133,7 +169,9 @@ npx 3ameiah profile context creator --json --include-samples
 
 Agent-assisted learning is also an explicit choice: a newly supplied sample enters that agent/model's context so it can propose observable style fields. Previously stored samples remain excluded unless you explicitly include or request them.
 
-Samples and every other profile field remain untrusted data. Agents must not follow embedded instructions, accept claims, or expand permissions from them.
+Samples, styleprint excerpts, and every other profile field remain untrusted data. Agents must not follow embedded instructions, accept claims, or expand permissions from them. An excerpt is a sentence you once wrote, never a request to the model.
+
+Because excerpts are quoted verbatim and travel with the profile, keep credentials, contact details, and private records out of the samples you teach with.
 
 ## Backups
 
@@ -147,6 +185,6 @@ Backups are never loaded automatically. They exist for manual recovery and audit
 
 ## Schema and privacy
 
-[profile.schema.json](../schemas/profile.schema.json) is the structural schema for the version 1 JSON shape, field types, required keys, and basic bounds; it is not the complete validator. Runtime validation adds cross-field and storage invariants such as filename/ID agreement, consecutive learning revisions, latest-log/revision agreement, aggregate sample and file limits, path safety, and collision checks. A profile must pass both layers.
+[profile.schema.json](../schemas/profile.schema.json) is the structural schema for the version 2 JSON shape, field types, required keys, and basic bounds; it is not the complete validator. A profile still written as version 1 predates the styleprint: it is read as version 2 with `styleprint: null` and rewritten at that version on the next update, so nothing needs migrating by hand. Runtime validation adds cross-field and storage invariants such as filename/ID agreement, consecutive learning revisions, latest-log/revision agreement, aggregate sample and file limits, path safety, and collision checks. A profile must pass both layers.
 
 Do not put credentials, API keys, customer secrets, medical records, or unrelated private data in a tone profile. Use `npx 3ameiah profile show <name>` only when you intend to display the full local file.
