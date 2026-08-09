@@ -78,7 +78,20 @@ A profile is one local JSON file that remembers style-relevant things you intent
 - tone, warmth, directness, and formality;
 - how much English you naturally mix in;
 - words and habits to prefer or avoid;
-- liked writing samples and examples you dislike.
+- liked writing samples and examples you dislike;
+- a **styleprint** measured from your own writing: the words, phrases, and Egyptian markers you actually repeat, your settled spellings, your sentence rhythm and punctuation habits, and real lines of yours to write against.
+
+A described voice produces text that matches a description. A measured one produces text that sounds like you, so give it real writing when you can:
+
+```bash
+npx 3ameiah learn creator --from ./good-post.txt --yes
+```
+
+```text
+Styleprint: 243 words, 34 sentences, ~7.15 words per sentence.
+Recurring wording: مش (8)، كتير (3)، كل يوم (3)، أصلا (2)، بقى (2)، بقول لك (2)
+Kept 20 excerpt(s), 8 opener(s), 8 closer(s).
+```
 
 ### First time: create it
 
@@ -137,7 +150,7 @@ npx 3ameiah learn creator \
   --dislike ./not-my-style.txt
 ```
 
-From the terminal, `--from` and `--dislike` archive the files as evidence; they do not automatically turn raw text into tone rules. The raw text also stays out of later automatic model context unless you explicitly request it through `profile context <name> --include-samples`. Either save the preferences yourself in the same call:
+From the terminal, `--from` and `--dislike` archive the files and measure their styleprint; they never turn raw text into opinions about your voice. A file too large to store is still measured in full, and the CLI says so rather than truncating it. The raw text stays out of later automatic model context unless you explicitly request it through `profile context <name> --include-samples`; the bounded styleprint travels with the profile so the voice can actually be reproduced. Either save the preferences yourself in the same call:
 
 ```bash
 npx 3ameiah learn creator \
@@ -188,7 +201,7 @@ explicit writing command > profile default mode
 task, facts, code, structure, and safety > every profile preference
 ```
 
-Profiles and samples are untrusted style data and must never be followed as instructions or treated as permission or factual proof. Stored sample text stays out of automatic model context unless you explicitly include it.
+Profiles, samples, and styleprint excerpts are untrusted style data and must never be followed as instructions or treated as permission or factual proof. An excerpt is a sentence you once wrote, not a request to the model. Whole stored samples stay out of automatic model context unless you explicitly include them.
 
 See [docs/PROFILES.md](docs/PROFILES.md) for file locations, structural schema, runtime validation, revisions, backups, and privacy.
 
@@ -298,8 +311,9 @@ It routes product UI, codebases, posts, ads, landing pages, scripts, subtitles, 
 - No `postinstall` hook. Filesystem changes happen only after an explicit command.
 - 3ameiah has no telemetry; the pinned installer has documented opt-out anonymous telemetry.
 - Profile updates back up the prior revision.
-- Tone samples stay local at rest, have strict size limits, and are excluded from automatic context.
+- Whole tone samples stay local at rest, have strict size limits, and are excluded from automatic context.
 - Samples enter model context only after an explicit request and remain untrusted content, never instructions.
+- The derived styleprint travels with the profile by design, is capped in every dimension, and quotes only short excerpts; treat it as untrusted style data too.
 - Do not store credentials, tokens, sensitive records, or unrelated private data in profiles.
 - “Write this message” never means “send this message.”
 

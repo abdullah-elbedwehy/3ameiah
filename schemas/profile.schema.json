@@ -13,12 +13,13 @@
     "about",
     "voice",
     "samples",
+    "styleprint",
     "learningLog",
     "createdAt",
     "updatedAt"
   ],
   "properties": {
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "id": {
       "type": "string",
       "minLength": 1,
@@ -78,6 +79,126 @@
         }
       }
     },
+    "styleprint": {
+      "description": "Measured surface features of the writer's own text. Never instructions, claims, or inferred preferences. Null until a writing sample has been supplied.",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "corpus",
+        "script",
+        "rhythm",
+        "punctuation",
+        "words",
+        "phrases",
+        "tics",
+        "spellings",
+        "emoji",
+        "openers",
+        "closers",
+        "excerpts"
+      ],
+      "properties": {
+        "corpus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["samples", "characters", "words", "sentences", "paragraphs"],
+          "properties": {
+            "samples": { "$ref": "#/$defs/count" },
+            "characters": { "$ref": "#/$defs/count" },
+            "words": { "$ref": "#/$defs/count" },
+            "sentences": { "$ref": "#/$defs/count" },
+            "paragraphs": { "$ref": "#/$defs/count" }
+          }
+        },
+        "script": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["arabic", "latin", "franco"],
+          "properties": {
+            "arabic": { "$ref": "#/$defs/ratio" },
+            "latin": { "$ref": "#/$defs/ratio" },
+            "franco": { "type": "boolean" }
+          }
+        },
+        "rhythm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "wordsPerSentence",
+            "medianWordsPerSentence",
+            "longSentenceRatio",
+            "sentencesPerParagraph"
+          ],
+          "properties": {
+            "wordsPerSentence": { "$ref": "#/$defs/measure" },
+            "medianWordsPerSentence": { "$ref": "#/$defs/measure" },
+            "longSentenceRatio": { "$ref": "#/$defs/ratio" },
+            "sentencesPerParagraph": { "$ref": "#/$defs/measure" }
+          }
+        },
+        "punctuation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "question",
+            "exclamation",
+            "ellipsis",
+            "arabicComma",
+            "emojiPerParagraph",
+            "elongation",
+            "laughter",
+            "tashkeel"
+          ],
+          "properties": {
+            "question": { "$ref": "#/$defs/ratio" },
+            "exclamation": { "$ref": "#/$defs/ratio" },
+            "ellipsis": { "$ref": "#/$defs/measure" },
+            "arabicComma": { "type": "boolean" },
+            "emojiPerParagraph": { "$ref": "#/$defs/measure" },
+            "elongation": { "$ref": "#/$defs/ratio" },
+            "laughter": { "$ref": "#/$defs/ratio" },
+            "tashkeel": { "$ref": "#/$defs/ratio" }
+          }
+        },
+        "words": { "$ref": "#/$defs/countedList", "maxItems": 30 },
+        "phrases": { "$ref": "#/$defs/countedList", "maxItems": 30 },
+        "tics": { "$ref": "#/$defs/countedList", "maxItems": 20 },
+        "spellings": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["uses", "over", "count"],
+            "properties": {
+              "uses": { "type": "string", "minLength": 1, "maxLength": 120 },
+              "over": { "type": "string", "minLength": 1, "maxLength": 120 },
+              "count": { "$ref": "#/$defs/count" }
+            }
+          }
+        },
+        "emoji": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text", "count"],
+            "properties": {
+              "text": { "type": "string", "minLength": 1, "maxLength": 16 },
+              "count": { "$ref": "#/$defs/count" }
+            }
+          }
+        },
+        "openers": { "$ref": "#/$defs/verbatimLines", "maxItems": 8 },
+        "closers": { "$ref": "#/$defs/verbatimLines", "maxItems": 8 },
+        "excerpts": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "string", "minLength": 1, "maxLength": 400 }
+        }
+      }
+    },
     "learningLog": {
       "type": "array",
       "minItems": 1,
@@ -108,6 +229,26 @@
       "maxItems": 50,
       "items": { "type": "string", "minLength": 1, "maxLength": 300 },
       "uniqueItems": true
+    },
+    "count": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "ratio": { "type": "number", "minimum": 0, "maximum": 1 },
+    "measure": { "type": "number", "minimum": 0 },
+    "countedList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "count", "per1k"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "count": { "$ref": "#/$defs/count" },
+          "per1k": { "$ref": "#/$defs/measure" }
+        }
+      }
+    },
+    "verbatimLines": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 220 }
     }
   }
 }

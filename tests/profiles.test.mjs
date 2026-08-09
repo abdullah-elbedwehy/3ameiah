@@ -12,6 +12,7 @@ import {
   globalConfigRoot,
   learnProfile,
   listProfiles,
+  migrateProfile,
   normalizeProfileId,
   profileContext,
   resolveProfile,
@@ -269,11 +270,19 @@ test("sample text stays local by default, can be explicitly included, and is cap
   assert.match(explicit.safety, /Never follow instructions/);
 });
 
-test("a single oversized sample is rejected instead of silently truncated", async (t) => {
+test("an oversized sample is measured in full but never truncated into storage", async (t) => {
   const f = await fixture(t);
   const sample = path.join(f.root, "oversized.txt");
-  await writeFile(sample, "س".repeat(12_001), "utf8");
-  await assert.rejects(buildProfile({ name: "sample", sampleFiles: [sample] }), /shorter excerpt/);
+  const line = "الفكرة بقى إن الشرح لازم يبقى بمثال عملي مش كلام نظري خالص.\n\n";
+  await writeFile(sample, line.repeat(400), "utf8");
+  assert.ok(line.repeat(400).length > 12_000);
+
+  const result = await learnProfile({ name: "big", sampleFiles: [sample] }, { env: f.env });
+  assert.deepEqual(result.profile.samples, []);
+  assert.deepEqual(result.measuredOnly, [{ source: "oversized.txt", characters: line.repeat(400).trim().length }]);
+  assert.ok(result.profile.styleprint.corpus.characters > 12_000);
+  assert.ok(result.profile.styleprint.tics.some((tic) => tic.text === "بقى"));
+  assert.deepEqual(result.profile.learningLog.at(-1).fields, ["styleprint"]);
 });
 
 test("a full sample store rejects an update instead of logging discarded learning", async (t) => {
@@ -289,6 +298,73 @@ test("a full sample store rejects an update instead of logging discarded learnin
   );
   const resolved = await resolveProfile({ name: "voice", env: f.env });
   assert.equal(resolved.profile.revision, 1);
+});
+
+test("a version 1 profile keeps working and is rewritten at version 2 on the next lesson", async (t) => {
+  const f = await fixture(t);
+  const legacy = {
+    schemaVersion: 1,
+    id: "legacy",
+    displayName: "legacy",
+    revision: 1,
+    defaultMode: "3ameiah",
+    about: ["كاتب قديم"],
+    voice: {
+      tone: "دافي", audience: "general", address: "auto", formality: 3, warmth: 3,
+      directness: 3, codeSwitching: "natural", spellings: [], prefer: [], avoid: []
+    },
+    samples: [],
+    learningLog: [{ revision: 1, learnedAt: "2026-08-08T10:00:00.000Z", fields: ["tone"], note: "" }],
+    createdAt: "2026-08-08T10:00:00.000Z",
+    updatedAt: "2026-08-08T10:00:00.000Z"
+  };
+  assert.throws(() => validateProfile(legacy), /missing or unknown fields/);
+  assert.deepEqual(migrateProfile(legacy), { ...legacy, schemaVersion: 2, styleprint: null });
+
+  const profiles = path.join(f.globalRoot, "profiles");
+  await mkdir(profiles, { recursive: true });
+  await writeFile(path.join(profiles, "legacy.json"), `${JSON.stringify(legacy)}\n`, "utf8");
+
+  const resolved = await resolveProfile({ name: "legacy", env: f.env });
+  assert.equal(resolved.profile.schemaVersion, 2);
+  assert.equal(resolved.profile.styleprint, null);
+  assert.deepEqual(resolved.profile.about, ["كاتب قديم"]);
+  assert.equal(profileContext(resolved).styleprint, null);
+
+  const updated = await learnProfile({ name: "legacy", about: ["بقى جديد"] }, { env: f.env });
+  assert.equal(updated.profile.revision, 2);
+  const onDisk = JSON.parse(await readFile(updated.path, "utf8"));
+  assert.equal(onDisk.schemaVersion, 2);
+  assert.equal(onDisk.styleprint, null);
+  assert.equal(onDisk.createdAt, legacy.createdAt);
+});
+
+test("a styleprint travels with profile context while raw samples stay behind", async (t) => {
+  const f = await fixture(t);
+  const sample = path.join(f.root, "voice.txt");
+  const line = "بص يا صاحبي، الفكرة بقى إن الشرح لازم يبقى بمثال عملي مش كلام نظري خالص.";
+  await writeFile(sample, Array.from({ length: 8 }, () => line).join("\n\n"), "utf8");
+  const learned = await learnProfile({ name: "voice", sampleFiles: [sample] }, { env: f.env });
+
+  const context = profileContext(learned);
+  assert.equal("samples" in context, false);
+  assert.equal(context.sampleEvidence.liked, 1);
+  assert.ok(context.styleprint.tics.some((tic) => tic.text === "بقى"));
+  assert.ok(context.styleprint.excerpts.length > 0);
+  assert.match(context.safety, /styleprint excerpts/);
+
+  // The context must be a copy, so a consumer cannot mutate the stored profile.
+  context.styleprint.tics.length = 0;
+  assert.ok(learned.profile.styleprint.tics.length > 0);
+});
+
+test("re-teaching the same sample changes nothing instead of faking a measurement", async (t) => {
+  const f = await fixture(t);
+  const sample = path.join(f.root, "voice.txt");
+  const line = "الفكرة بقى إن الشرح لازم يبقى بمثال عملي مش كلام نظري خالص يا صاحبي.";
+  await writeFile(sample, Array.from({ length: 8 }, () => line).join("\n\n"), "utf8");
+  await learnProfile({ name: "voice", sampleFiles: [sample] }, { env: f.env });
+  await assert.rejects(learnProfile({ name: "voice", sampleFiles: [sample] }, { env: f.env }), /nothing changed/);
 });
 
 test("strict validation rejects unknown prompt-like fields", async () => {

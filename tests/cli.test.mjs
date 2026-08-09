@@ -20,10 +20,11 @@ function run(bin, args, options = {}) {
   });
 }
 
-test("CLI exposes version and a safe noninteractive installer", () => {
+test("CLI reports the published package version and a safe noninteractive installer", async () => {
+  const published = JSON.parse(await readFile(path.join(root, "package.json"), "utf8")).version;
   const version = run(cli, ["--version"]);
   assert.equal(version.status, 0);
-  assert.equal(version.stdout.trim(), "0.1.0");
+  assert.equal(version.stdout.trim(), published, "CLI version must track package.json");
 
   const install = run(cli, ["install", "--dry-run"]);
   assert.equal(install.status, 0);
@@ -132,17 +133,20 @@ test("routine JSON output redacts raw writing samples unless explicitly requeste
   assert.match(shown.stdout, new RegExp(marker));
 });
 
-test("terminal sample-only learning explains that evidence is not inferred style", async (t) => {
+test("terminal sample learning reports the measurement and never claims to have inferred style", async (t) => {
   const temp = await mkdtemp(path.join(os.tmpdir(), "3ameiah-cli-sample-guidance-test-"));
   t.after(() => rm(temp, { recursive: true, force: true }));
   const sample = path.join(temp, "sample.txt");
-  await writeFile(sample, "ده مثال على الأسلوب", "utf8");
+  const line = "بص يا صاحبي، الفكرة بقى إن الشرح لازم يبقى بمثال عملي مش كلام نظري خالص.";
+  await writeFile(sample, Array.from({ length: 8 }, () => line).join("\n\n"), "utf8");
   const result = run(cli, ["learn", "creator", "--yes", "--from", sample], {
     cwd: temp,
     env: { THREEAMEIAH_CONFIG_DIR: path.join(temp, "global") }
   });
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Saved sample evidence only/);
+  assert.match(result.stdout, /Styleprint: \d+ words/);
+  assert.match(result.stdout, /Recurring wording:.*بقى/);
+  assert.match(result.stdout, /never infers tone rules, facts, or preferences/);
   assert.match(result.stdout, /\/3ameiah-learn creator/);
 });
 
