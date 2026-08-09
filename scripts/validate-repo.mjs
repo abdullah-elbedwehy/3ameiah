@@ -19,6 +19,7 @@ const errors = [];
 
 await validatePackage();
 await validateSkills();
+await validatePublishedPayload();
 await validatePublicText();
 
 if (errors.length > 0) {
@@ -89,6 +90,33 @@ async function validateNoSymlinks(directory) {
       errors.push(`${relative(child)} is a symlink; skill packages must be self-contained regular files.`);
     } else if (entry.isDirectory()) {
       await validateNoSymlinks(child);
+    }
+  }
+}
+
+/**
+ * A nested .npmignore replaces the root rules for its directory instead of extending them,
+ * so build artifacts can silently reach the published tarball. Every directory that ships
+ * and carries its own .npmignore must therefore restate the junk rules.
+ */
+async function validatePublishedPayload() {
+  const required = ["__pycache__/", "*.py[cod]"];
+  const publishedRoots = JSON.parse(await readFile(path.join(root, "package.json"), "utf8")).files ?? [];
+  for (const entry of publishedRoots) {
+    const directory = path.join(root, entry);
+    if (!(await exists(directory)) || !(await stat(directory)).isDirectory()) continue;
+    for (const file of await walk(directory)) {
+      if (path.basename(file) !== ".npmignore") continue;
+      const rules = (await readFile(file, "utf8")).split(/\r?\n/).map((line) => line.trim());
+      const missing = required.filter((rule) => !rules.includes(rule));
+      if (missing.length > 0) {
+        errors.push(`${relative(file)} must also ignore ${missing.join(" and ")}; it overrides the root .npmignore for its directory.`);
+      }
+    }
+    for (const file of await walk(directory)) {
+      if (/(?:^|[\\/])__pycache__[\\/]|\.py[cod]$/.test(file)) {
+        errors.push(`${relative(file)} is a build artifact inside a published directory; remove it before packing.`);
+      }
     }
   }
 }
