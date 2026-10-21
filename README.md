@@ -7,6 +7,8 @@
 
 Natural Egyptian Arabic and readable Franco for coding agents—with six commands that are easy to remember.
 
+**Website:** [3ameiah.elbedwehy.tech](https://3ameiah.elbedwehy.tech/) · **Agent-readable install guide:** [3ameiah.elbedwehy.tech/install.md](https://3ameiah.elbedwehy.tech/install.md)
+
 ## Install once
 
 ```bash
@@ -210,16 +212,16 @@ See [docs/PROFILES.md](docs/PROFILES.md) for file locations, structural schema, 
 Copy:
 
 ```text
-https://github.com/abdullah-elbedwehy/3ameiah
+https://3ameiah.elbedwehy.tech
 ```
 
 Paste it into any tool-enabled coding agent with terminal and filesystem access, then say:
 
 ```text
-Review this repository and its scripts. Detect this agent's exact target ID, inspect existing same-name skills for local modifications, then install all six skills globally with the pinned universal skills CLI. Do not replace a locally modified skill without telling me first. Verify all six names and tell me the exact invocation syntax here: https://github.com/abdullah-elbedwehy/3ameiah
+Open https://3ameiah.elbedwehy.tech/install.md, verify its canonical GitHub source and bundled scripts, then detect this agent's exact target ID. Inspect existing same-name skills for local modifications and install all six skills globally with the pinned universal skills CLI. Do not replace a locally modified skill without telling me first. Verify all six names and tell me the exact invocation syntax here.
 ```
 
-A chat-only LLM cannot install files on your computer. It can still read and apply the raw [core skill](skills/3ameiah/SKILL.md) for that conversation. A standalone copy/paste version lives in [INSTALL-FOR-AGENTS.md](INSTALL-FOR-AGENTS.md).
+A chat-only LLM cannot install files on your computer. It can still read and apply the raw [core skill](skills/3ameiah/SKILL.md) for that conversation. The website always points back to the canonical [GitHub source](https://github.com/abdullah-elbedwehy/3ameiah), and a standalone copy/paste version lives in [INSTALL-FOR-AGENTS.md](INSTALL-FOR-AGENTS.md).
 
 ## Installation options
 

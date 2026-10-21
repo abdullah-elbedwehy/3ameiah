@@ -27,6 +27,15 @@ npm run test:all
 npm pack --dry-run
 ```
 
+The landing page is an isolated private Vite package, so test it separately:
+
+```bash
+npm ci --prefix website
+npm run check --prefix website
+```
+
+Keep website-only dependencies inside `website/package.json`; the root npm tarball must not include `website/`.
+
 ## Skill rules
 
 - Put every installable skill under `skills/<name>/SKILL.md`.

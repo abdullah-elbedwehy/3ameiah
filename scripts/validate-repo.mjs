@@ -177,7 +177,7 @@ async function validateLinks(file, text, boundary) {
 async function walk(directory) {
   const output = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
-    if ([".git", "node_modules"].includes(entry.name)) continue;
+    if ([".git", ".impeccable", ".playwright-cli", "dist", "node_modules", "output"].includes(entry.name)) continue;
     const child = path.join(directory, entry.name);
     if (entry.isDirectory()) output.push(...await walk(child));
     else if (entry.isFile()) output.push(child);

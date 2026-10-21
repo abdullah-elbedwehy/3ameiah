@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ar-EG" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>3ameiah — الـAI بقا بيتكلم مصري</title>
+    <meta name="description" content="نزّل 3ameiah وخلي أي Agent يكتب عامية مصرية طبيعية أو فرانكو، بأربع نبرات وبروفايلات بتتعلم أسلوبك—من غير ما تبوّظ الكود أو المعنى." />
+    <meta name="theme-color" content="#0954d9" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://3ameiah.elbedwehy.tech/" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preload" href="/assets/hero-cassette.webp" as="image" type="image/webp" fetchpriority="high" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta property="og:site_name" content="3ameiah" />
+    <meta property="og:title" content="3ameiah — الـAI بقا بيتكلم مصري" />
+    <meta property="og:description" content="عامية مصرية وفرانكو جوّه شغلك الحقيقي، بأربع نبرات وبروفايلات بتتعلم أسلوبك." />
+    <meta property="og:url" content="https://3ameiah.elbedwehy.tech/" />
+    <meta property="og:image" content="https://3ameiah.elbedwehy.tech/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="3ameiah — شريط كاسيت بمسارات الكتابة الأربعة" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="3ameiah — الـAI بقا بيتكلم مصري" />
+    <meta name="twitter:description" content="ابعت اللينك لأي Agent عنده Terminal وسيبه يثبت 3ameiah ويكمل." />
+    <meta name="twitter:image" content="https://3ameiah.elbedwehy.tech/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "3ameiah",
+        "alternateName": "عامية",
+        "url": "https://3ameiah.elbedwehy.tech/",
+        "downloadUrl": "https://www.npmjs.com/package/3ameiah",
+        "codeRepository": "https://github.com/abdullah-elbedwehy/3ameiah",
+        "sameAs": [
+          "https://github.com/abdullah-elbedwehy/3ameiah",
+          "https://www.npmjs.com/package/3ameiah"
+        ],
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any tool-enabled agent environment",
+        "softwareVersion": "0.1.0",
+        "inLanguage": ["ar-EG", "en"],
+        "license": "https://github.com/abdullah-elbedwehy/3ameiah/blob/main/LICENSE",
+        "description": "Open-source Agent Skills for natural Egyptian Arabic and readable Franco with reusable local tone profiles."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "هل لازم أفهم Terminal عشان أستخدم 3ameiah؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لأ. انسخ لينك الموقع وابعتُه لأي Agent عنده صلاحية Terminal وملفات، واطلب منه يثبت اللي في الصفحة. لو الـAgent شات بس ومش بيقدر يكتب ملفات، هيقدر يشرح أو يطبق الأسلوب في المحادثة لكنه مش هيقدر يثبت Skill على جهازك."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل 3ameiah بتترجم الكود؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لأ. هي بتغيّر الكلام اللي الإنسان بيقراه، وتحافظ على الأوامر والـURLs والـplaceholders وأسماء الـAPIs والكود زي ما هي."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "البروفايل بيتخزن فين؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "البروفايل بيتخزن محليًا في مساحة المستخدم، برا المشروع. العينات لا تدخل تلقائيًا في سياق الموديل، ومفيش Telemetry داخل 3ameiah نفسها."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <!--
+      THESIS: Egyptian tone is routed like magnetic tape through the real task; this page refuses the centered SaaS hero and generic feature-card stack.
+      OWN-WORLD: cobalt dubbing-booth field, mango labels, coral/mint/yellow/blue tape routes, carbon controls, warm paper, and cassette print registration.
+      STORY: understand the skill, hear the difference, pick a tone, copy one URL, then learn the technical path only if needed.
+      FIRST VIEWPORT: giant cropped cassette left, two-line Arabic claim right, mango URL label below it, four routes leaving the cassette and continuing into the demo.
+      FORM: Cassette Route, grounded direction 6, seed e785e806; user-approved comp .impeccable/mocks/cassette-route.png.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review and DESIGN.md
+    -->
+    <a class="skip-link" href="#main">انط للمحتوى</a>
+
+    <!-- Transport bar: the page is one tape, so the progress runs the full width under
+         the header instead of hiding in a side sliver. The markers are real navigation. -->
+    <nav class="scroll-deck" aria-label="مؤشر التقدم والانتقال بين الأقسام">
+      <span class="scroll-deck-label" aria-hidden="true">PLAY</span>
+
+      <div class="scroll-deck-track">
+        <span class="scroll-deck-progress" aria-hidden="true"></span>
+        <span class="scroll-deck-head" aria-hidden="true"><i></i></span>
+
+        <a class="deck-mark" href="#difference" data-deck-mark style="--mark: 0"><span>شوف الفرق</span></a>
+        <a class="deck-mark" href="#modes" data-deck-mark style="--mark: 0"><span>الأربع نبرات</span></a>
+        <a class="deck-mark" href="#profiles" data-deck-mark style="--mark: 0"><span>البروفايل</span></a>
+        <a class="deck-mark" href="#install" data-deck-mark style="--mark: 0"><span>التثبيت</span></a>
+      </div>
+
+      <span class="scroll-deck-counter" data-scroll-counter aria-hidden="true">00</span>
+    </nav>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="3ameiah — أول الصفحة">
+        <img src="/assets/3ameiah-logo.webp" alt="" width="962" height="708" />
+        <span dir="ltr">3ameiah</span>
+      </a>
+
+      <nav aria-label="أقسام الصفحة">
+        <a href="#difference">شوف الفرق</a>
+        <a href="#modes">الأربع نبرات</a>
+        <a href="#install">التثبيت</a>
+      </nav>
+
+      <a class="header-github" href="https://github.com/abdullah-elbedwehy/3ameiah" target="_blank" rel="noreferrer" aria-label="افتح مستودع 3ameiah على GitHub في تاب جديدة">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6a9.7 9.7 0 0 0-3.1 18.9c.5.1.7-.2.7-.5v-1.9c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.5 1.2 3 .9.1-.7.4-1.2.7-1.5-2.3-.3-4.7-1.2-4.7-4.8 0-1.1.4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.2 9.2 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.5 1 2.6 0 3.7-2.4 4.5-4.7 4.8.4.3.7 1 .7 1.9V21c0 .4.2.6.7.5A9.7 9.7 0 0 0 12 2.6Z" /></svg>
+        <span>GitHub</span>
+      </a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true">
+          <img src="/assets/hero-cassette.webp" alt="" width="1586" height="992" fetchpriority="high" />
+        </div>
+
+        <div class="hero-copy">
+          <h1 id="hero-title" aria-label="الـAI بقا بيتكلم مصري، وبيتكلم زيك">
+            الـAI بقا<br />
+            <span class="hero-line" aria-hidden="true">بيتكلم <span class="typeword" data-typewriter-word>مصري</span></span>
+          </h1>
+          <p class="hero-intro" aria-label="مش ترجمة حرفية، ومش كلام معلّب بكلمات عامية. دي Skill بتظبط النص اللي بيتقرأ جوّه الموقع أو الكود أو البوست أو السكريبت—مصري طبيعي، والمعنى والكود زي ما هما.">
+            <span class="sr-only">مش ترجمة حرفية، ومش كلام معلّب بكلمات عامية. دي Skill بتظبط النص اللي بيتقرأ جوّه الموقع أو الكود أو البوست أو السكريبت—مصري طبيعي، والمعنى والكود زي ما هما.</span>
+            <span aria-hidden="true" data-hero-typecopy>مش ترجمة حرفية، ومش كلام معلّب بكلمات عامية. دي Skill بتظبط النص اللي بيتقرأ جوّه الموقع أو الكود أو البوست أو السكريبت—مصري طبيعي، والمعنى والكود زي ما هما.</span>
+          </p>
+
+          <button class="url-label copy-control" type="button" data-copy="https://3ameiah.elbedwehy.tech" data-copy-kind="url">
+            <span class="copy-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" /></svg>
+            </span>
+            <span class="url-label-copy">
+              <strong>انسخ لينك التثبيت</strong>
+              <bdi>3ameiah.elbedwehy.tech</bdi>
+            </span>
+            <span class="label-status" aria-hidden="true">COPY</span>
+          </button>
+
+          <p class="hero-hint">ابعت اللينك لأي Agent عنده Terminal وملفات، وقوله «نزّل اللي هنا». هو هيشرحلك ويكمّل الباقي.</p>
+          <div class="copy-live" aria-live="polite" aria-atomic="true" data-copy-live></div>
+        </div>
+
+        <svg class="hero-routes" viewBox="0 0 1440 340" preserveAspectRatio="none" aria-hidden="true">
+          <path class="route route-general" pathLength="1" d="M40 42H455Q510 42 510 98V270Q510 318 560 318H1400" />
+          <path class="route route-friendly" pathLength="1" d="M40 92H430Q485 92 485 145V248Q485 292 535 292H1400" />
+          <path class="route route-pro" pathLength="1" d="M40 142H405Q460 142 460 190V224Q460 266 510 266H1400" />
+          <path class="route route-franco" pathLength="1" d="M40 192H380Q435 192 435 225Q435 240 485 240H1400" />
+        </svg>
+
+        <div class="route-switches" aria-hidden="true">
+          <span class="route-switch switch-general"></span>
+          <span class="route-switch switch-friendly"></span>
+          <span class="route-switch switch-pro"></span>
+          <span class="route-switch switch-franco"></span>
+        </div>
+      </section>
+
+      <section class="difference paper-section" id="difference" aria-labelledby="difference-title">
+        <div class="section-heading">
+          <h2 id="difference-title">الفرق في الإحساس،<br />مش في المعنى.</h2>
+          <p>نفس المطلوب، ونفس الحقايق. اللي بيتغيّر هو الإحساس، وتركيب الجملة، وطريقة الكلام مع الشخص الصح.</p>
+        </div>
+
+        <div class="mode-switcher" role="group" aria-label="اختار نبرة المثال">
+          <button type="button" class="mode-chip is-active" data-mode="general" aria-pressed="true">عامية</button>
+          <button type="button" class="mode-chip" data-mode="professional" aria-pressed="false">بروفيشنال</button>
+          <button type="button" class="mode-chip" data-mode="friendly" aria-pressed="false">فريندلي</button>
+          <button type="button" class="mode-chip" data-mode="franco" aria-pressed="false">فرانكو</button>
+        </div>
+
+        <div class="comparison-stage">
+          <article class="comparison-sheet baseline-sheet">
+            <div class="sheet-tab">من غير 3ameiah</div>
+            <p class="comparison-text">تم إرسال طلبك بنجاح. يمكنك تتبعه من لوحة التحكم.</p>
+            <span class="sheet-note">صح، بس مش صوت بني آدم مصري.</span>
+          </article>
+
+          <div class="tape-transfer" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+
+          <article class="comparison-sheet result-sheet">
+            <div class="sheet-tab">مع 3ameiah</div>
+            <p class="comparison-text" data-after>طلبك اتبعت بنجاح. تقدر تتابعه من الـDashboard.</p>
+            <span class="sheet-note" data-after-note>طبيعي، واضح، ونفس المعنى.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="modes" id="modes" aria-labelledby="modes-title">
+        <div class="modes-intro">
+          <h2 id="modes-title">أربع Tracks.<br />اختار اللي راكب على الموقف.</h2>
+          <p>اختيار الأسلوب حسب احتياجك.</p>
+        </div>
+
+        <ol class="track-list">
+          <li class="track track-general">
+            <div class="track-badge" aria-hidden="true">
+              <span class="track-tone">النبرة الأولى</span>
+            </div>
+            <div>
+              <h3>عامية</h3>
+              <p>المصري الطبيعي اللي ينفع في أغلب الشغل، من غير تكلف ولا افتعال.</p>
+              <code dir="ltr">/3ameiah</code>
+            </div>
+          </li>
+          <li class="track track-pro">
+            <div class="track-badge" aria-hidden="true">
+              <span class="track-tone">النبرة الثانية</span>
+            </div>
+            <div>
+              <h3>بروفيشنال</h3>
+              <p>واضح ومحترم للعميل والشغل، بس لسه مصري ومش خطاب حكومي.</p>
+              <code dir="ltr">/3ameiah-pro</code>
+            </div>
+          </li>
+          <li class="track track-friendly">
+            <div class="track-badge" aria-hidden="true">
+              <span class="track-tone">النبرة الثالثة</span>
+            </div>
+            <div>
+              <h3>فريندلي</h3>
+              <p>قريب ودافي—كأنك مع صاحبك على القهوة.</p>
+              <code dir="ltr">/3ameiah-friendly</code>
+            </div>
+          </li>
+          <li class="track track-franco">
+            <div class="track-badge" aria-hidden="true">
+              <span class="track-tone">النبرة الرابعة</span>
+            </div>
+            <div>
+              <h3>فرانكو</h3>
+              <p dir="ltr">franco shababy w lazeez</p>
+              <code dir="ltr">/3ameiah-franco</code>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="profiles" id="profiles" aria-labelledby="profiles-title">
+        <!-- Drawn, not photographed: the reels wind as the section scrolls, so the
+             profile literally records while you read about it. -->
+        <div class="profile-tape" aria-hidden="true">
+          <svg class="profile-tape-art" viewBox="0 0 420 314" role="img">
+            <defs>
+              <clipPath id="tape-window-clip">
+                <rect x="106" y="96" width="208" height="76" rx="12" />
+              </clipPath>
+              <pattern id="tape-grain" width="6" height="6" patternUnits="userSpaceOnUse">
+                <path d="M0 6 6 0" stroke="rgba(255,255,255,.045)" stroke-width="1.6" />
+              </pattern>
+            </defs>
+
+            <!-- carbon shell -->
+            <rect x="8" y="8" width="404" height="298" rx="22" class="tape-body" />
+            <rect x="8" y="8" width="404" height="298" rx="22" fill="url(#tape-grain)" />
+
+            <!-- cream label plate + coral band -->
+            <rect x="32" y="30" width="356" height="146" class="tape-label-plate" />
+            <rect x="32" y="176" width="356" height="32" class="tape-label-stripe" />
+
+            <!-- printed rules, they run behind the window and out the other side -->
+            <g class="tape-rules">
+              <path d="M84 100h296" stroke-width="5" />
+              <path d="M32 126h348" stroke-width="3" />
+              <path d="M32 150h348" stroke-width="3" />
+            </g>
+
+            <!-- side-3 badge and register mark -->
+            <rect x="44" y="66" width="34" height="34" rx="3" class="tape-badge" />
+            <text x="61" y="91" class="tape-badge-text">3</text>
+            <rect x="330" y="44" width="42" height="22" rx="2" class="tape-register" />
+
+            <!-- hand-lettered wordmark -->
+            <g class="tape-wordmark">
+              <path d="M100 46q6-12 18-9q12 3 8 13q-3 7-11 7q11 0 13 11q2 12-11 14q-11 2-17-5" />
+              <path d="M156 56q-9-9-17-1q-8 8-3 17q5 9 14 4q7-4 6-20q-1 16 3 21q3 4 7 1" />
+              <path d="M166 74q-1-20 1-23q3-4 6 1q3 4 3 9q1-11 6-11q5 0 5 10q1-10 6-10q6 0 6 11q0 7-1 13" />
+              <path d="M232 58q-4-8-12-5q-9 3-9 12q0 10 10 11q7 1 11-4M212 62q10-1 16-4" />
+              <path d="M242 52v22M242 38v3" />
+              <path d="M276 56q-9-9-17-1q-8 8-3 17q5 9 14 4q7-4 6-20q-1 16 3 21q3 4 7 1" />
+              <path d="M290 34v40q0-16 6-20q7-5 10 4q2 6 2 16" />
+            </g>
+
+            <!-- tape window: wound hubs and the exposed pack between them -->
+            <g clip-path="url(#tape-window-clip)">
+              <rect x="106" y="96" width="208" height="76" class="tape-window-bg" />
+              <circle cx="152" cy="134" r="34" class="tape-wound tape-wound-left" />
+              <circle cx="268" cy="134" r="20" class="tape-wound tape-wound-right" />
+              <g class="tape-pack">
+                <rect x="182" y="108" width="56" height="52" rx="3" />
+                <path d="M188 108v52M194 108v52M200 108v52M220 108v52M226 108v52M232 108v52" />
+              </g>
+              <rect x="204" y="108" width="14" height="52" class="tape-pack-core" />
+              <path d="M152 104h116M152 164h116" class="tape-span" />
+            </g>
+            <rect x="106" y="96" width="208" height="76" rx="12" class="tape-window-frame" />
+
+            <!-- reels turn with the scroll -->
+            <g class="tape-reel" data-reel="left" style="transform-origin:152px 134px">
+              <circle cx="152" cy="134" r="21" class="tape-hub" />
+              <g class="tape-teeth">
+                <path d="M152 116v9M152 143v9M134 134h9M161 134h9M139 121l6 6M165 147l-6-6M139 147l6-6M165 121l-6 6" />
+              </g>
+              <circle cx="152" cy="134" r="6" class="tape-spindle" />
+            </g>
+            <g class="tape-reel" data-reel="right" style="transform-origin:268px 134px">
+              <circle cx="268" cy="134" r="21" class="tape-hub" />
+              <g class="tape-teeth">
+                <path d="M268 116v9M268 143v9M250 134h9M277 134h9M255 121l6 6M281 147l-6-6M255 147l6-6M281 121l-6 6" />
+              </g>
+              <circle cx="268" cy="134" r="6" class="tape-spindle" />
+            </g>
+
+            <!-- direction arrow and dash code on the coral band -->
+            <path d="M252 192h96m-14-9 14 9-14 9" class="tape-arrow" />
+            <path d="M60 196h14M82 196h10M100 196h14M122 196h6M136 196h16M160 196h10" class="tape-dashes" />
+
+            <!-- lower shell: label recess, guide holes, screws -->
+            <path d="M104 300 132 238h156l28 62" class="tape-recess" />
+            <circle cx="152" cy="284" r="8" class="tape-hole" />
+            <circle cx="184" cy="278" r="8" class="tape-hole" />
+            <circle cx="252" cy="272" r="11" class="tape-hole" />
+            <circle cx="288" cy="272" r="11" class="tape-hole" />
+
+            <g class="tape-screws">
+              <g class="tape-screw" style="transform-origin:38px 40px"><circle cx="38" cy="40" r="10" /><path d="M33 35l10 10M43 35l-10 10" /></g>
+              <g class="tape-screw" style="transform-origin:382px 40px"><circle cx="382" cy="40" r="10" /><path d="M377 35l10 10M387 35l-10 10" /></g>
+              <g class="tape-screw" style="transform-origin:52px 288px"><circle cx="52" cy="288" r="10" /><path d="M47 283l10 10M57 283l-10 10" /></g>
+              <g class="tape-screw" style="transform-origin:368px 288px"><circle cx="368" cy="288" r="10" /><path d="M363 283l10 10M373 283l-10 10" /></g>
+              <g class="tape-screw" style="transform-origin:210px 250px"><circle cx="210" cy="250" r="9" /><path d="M205.5 245.5l9 9M214.5 245.5l-9 9" /></g>
+            </g>
+          </svg>
+
+          <div class="profile-tape-label"><bdi>creator.profile</bdi></div>
+          <div class="profile-tape-counter" data-tape-counter><bdi>000</bdi></div>
+        </div>
+
+        <div class="profiles-copy">
+          <h2 id="profiles-title">علّمه أسلوبك<br />وهيكتب زيك بالظبط</h2>
+          <p>اعمل بروفايل باسمك وادّيه حاجات انت كتبتها قبل كده—هيتعلم أسلوبك ويكتب زيك بالظبط.</p>
+
+          <div class="command-sequence" aria-label="أوامر البروفايل">
+            <div><span>اعمل أو حسّن</span><code dir="ltr">/3ameiah-learn creator</code></div>
+            <div><span>استخدمه</span><code dir="ltr">/3ameiah-use creator</code></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="install" id="install" aria-labelledby="install-title">
+        <div class="install-copy">
+          <h2 id="install-title">اختار طريقه التثبيت الي بتفضلها</h2>
+          <p>لو مش عايز تعرف npm ولا skill directories، متعرفش. انسخ اللينك وابعتُه للـAgent. ولو بتحب التيرمنال، عندك كوماند واحد.</p>
+        </div>
+
+        <div class="install-paths">
+          <article class="install-path easy-path">
+            <div class="path-label">السكة السهلة</div>
+            <ol>
+              <li>انسخ <bdi>3ameiah.elbedwehy.tech</bdi></li>
+              <li>ابعته للـAgent</li>
+              <li>قوله: «نزّل اللي هنا»</li>
+            </ol>
+            <button class="copy-message copy-control" type="button" data-copy="ثبّتلي 3ameiah من https://3ameiah.elbedwehy.tech بعد ما تراجع المصدر، وبعدها اتأكد إن الأوامر الستة شغالة." data-copy-kind="message">
+              <span>انسخ الرسالة جاهزة</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" /></svg>
+            </button>
+          </article>
+
+          <article class="install-path terminal-path">
+            <div class="path-label">من التيرمنال</div>
+            <div class="terminal-command">
+              <code dir="ltr">npx 3ameiah install</code>
+              <button class="copy-control icon-button" type="button" aria-label="انسخ كوماند التثبيت" data-copy="npx 3ameiah install" data-copy-kind="command">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" /></svg>
+              </button>
+            </div>
+            <details>
+              <summary>عايز تختار Agent بنفسك؟</summary>
+              <code dir="ltr">npx 3ameiah install --interactive</code>
+            </details>
+          </article>
+        </div>
+
+        <div class="agent-strip" aria-label="أمثلة من الـAgents المدعومة">
+          <span>Claude Code</span><span>Codex</span><span>Cursor</span><span>Gemini CLI</span><span>GitHub Copilot</span><span>Windsurf</span><span>OpenCode</span><span>Roo Code</span><span>+68 target</span>
+        </div>
+
+        <p class="agent-caveat">ملحوظة صغيرة: لازم الـAgent يكون عنده صلاحية يفتح Terminal ويكتب ملفات. لو هو شات بس، هيقدر يطبّق الأسلوب في المحادثة، إنما مش هيثبّت حاجة على جهازك.</p>
+      </section>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">شويه اسئله اكيد جت في بالك</h2>
+        <div class="faq-list">
+          <details>
+            <summary>هل 3ameiah بتترجم الكود؟</summary>
+            <p>لأ. هي بتظبط الكلام اللي الإنسان بيقراه، وتحافظ على الكود والـURLs والـplaceholders وأسماء الـAPIs زي ما هي.</p>
+          </details>
+          <details>
+            <summary>هل ينفع أستخدمها في أي حاجة؟</summary>
+            <p>تنفع في المواقع، الرسائل، البوستات، السكريبتات، الدروس، المستندات وحاجات تانية. الـSkill بتتكيّف مع نوع الشغل بدل ما تحوّله لقالب كتابة واحد.</p>
+          </details>
+          <details>
+            <summary>هي مجانية؟</summary>
+            <p>المشروع Open Source برخصة MIT، وموجود على GitHub وnpm. أي تكلفة موديل أو Agent بتفضل حسب الأداة اللي إنت مستخدمها.</p>
+          </details>
+          <details>
+            <summary>ليه الاسم في Codex بيبدأ بـ$ بدل /؟</summary>
+            <p>كل Agent ليه طريقة استدعاء Skills. Claude Code بيستخدم <code dir="ltr">/3ameiah</code>، وCodex بيستخدم <code dir="ltr">$3ameiah</code>. اسم الـSkill نفسه ثابت.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="final-cta" aria-labelledby="final-title">
+        <div class="final-cta-inner">
+          <div class="final-content">
+            <p class="final-kicker">كفاية كلام لحد هنا.</p>
+            <h2 id="final-title">جرّب <bdi dir="ltr">3ameiah</bdi><br />على شغلك دلوقتي.</h2>
+            <p class="final-description">انسخ اللينك وابعتُه لأي Agent عنده Terminal وملفات. هو هيثبّت 3ameiah ويكمّل معاك.</p>
+
+            <div class="final-action" data-copy-scope>
+              <button class="final-copy copy-control" type="button" data-copy="https://3ameiah.elbedwehy.tech" data-copy-kind="url" aria-describedby="final-copy-feedback">
+                <span class="final-copy-icon" aria-hidden="true">
+                  <svg class="final-copy-glyph" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" /></svg>
+                  <svg class="final-check-glyph" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></svg>
+                </span>
+                <span class="final-copy-text">
+                  <strong data-copy-label>انسخ لينك التثبيت</strong>
+                  <bdi dir="ltr">3ameiah.elbedwehy.tech</bdi>
+                </span>
+              </button>
+              <p class="final-copy-feedback" id="final-copy-feedback" role="status" aria-live="polite" aria-atomic="true" data-copy-feedback data-idle-copy="لينك واحد، والباقي على الـAgent.">لينك واحد، والباقي على الـAgent.</p>
+            </div>
+          </div>
+
+          <div class="final-media" aria-hidden="true">
+            <img class="final-logo" src="/assets/3ameiah-logo.webp" alt="" width="962" height="708" loading="lazy" />
+          </div>
+
+          <div class="final-tape-run" aria-hidden="true">
+            <div class="final-tape-lanes">
+              <span class="final-tape-lane lane-coral"></span>
+              <span class="final-tape-lane lane-mint"></span>
+              <span class="final-tape-lane lane-mango"></span>
+              <span class="final-tape-lane lane-blue"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#top" aria-label="3ameiah — أول الصفحة">
+        <img src="/assets/3ameiah-logo.webp" alt="" width="962" height="708" loading="lazy" />
+        <span dir="ltr">3ameiah</span>
+      </a>
+      <p>Open source، معمول عشان الكلام يبان طالع من بني آدم—مش من قاموس.</p>
+      <div class="footer-links">
+        <span class="footer-made" dir="ltr">made by <a href="https://www.linkedin.com/in/abdullah-elbedwehy/" target="_blank" rel="noreferrer">abdullah elbedwehy</a></span>
+        <a href="https://github.com/abdullah-elbedwehy/3ameiah" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.npmjs.com/package/3ameiah" target="_blank" rel="noreferrer">npm</a>
+        <a href="https://github.com/abdullah-elbedwehy/3ameiah/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a>
+      </div>
+    </footer>
+
+    <noscript><p class="noscript">المحتوى كله شغال من غير JavaScript، بس النسخ السريع وتغيير الأمثلة محتاجين JavaScript.</p></noscript>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

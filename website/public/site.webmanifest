@@ -1,0 +1,25 @@
+{
+  "name": "3ameiah — الـAI بقا بيتكلم مصري",
+  "short_name": "3ameiah",
+  "description": "Agent Skills للعامية المصرية والفرانكو، بأربع نبرات وبروفايلات بتتعلم أسلوبك.",
+  "lang": "ar-EG",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0954d9",
+  "theme_color": "#0954d9",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

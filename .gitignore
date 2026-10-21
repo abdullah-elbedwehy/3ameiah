@@ -6,3 +6,7 @@ coverage/
 npm-debug.log*
 __pycache__/
 *.py[cod]
+.impeccable/
+.playwright-cli/
+output/
+website/dist/

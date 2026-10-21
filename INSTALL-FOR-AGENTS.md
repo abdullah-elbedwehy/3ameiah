@@ -1,6 +1,18 @@
 # Install 3ameiah From a Link
 
-Repository:
+Landing page:
+
+```text
+https://3ameiah.elbedwehy.tech
+```
+
+Machine-readable installation page:
+
+```text
+https://3ameiah.elbedwehy.tech/install.md
+```
+
+Canonical repository:
 
 ```text
 https://github.com/abdullah-elbedwehy/3ameiah
@@ -9,7 +21,7 @@ https://github.com/abdullah-elbedwehy/3ameiah
 ## Copy/paste prompt
 
 ```text
-Review https://github.com/abdullah-elbedwehy/3ameiah and its bundled scripts. If you have terminal and filesystem access, determine this agent's exact target ID and inspect existing same-name skills for local modifications. Install all six Agent Skills globally with the pinned universal skills CLI and full-depth discovery. If a same-name skill was modified locally, stop and report the conflict before replacing it. Then verify all six names with `npx skills list -g --json` and tell me the exact invocation syntax for this agent.
+Open https://3ameiah.elbedwehy.tech/install.md, confirm that it points to https://github.com/abdullah-elbedwehy/3ameiah, and review the repository's bundled scripts. If you have terminal and filesystem access, determine this agent's exact target ID and inspect existing same-name skills for local modifications. Install all six Agent Skills globally with the pinned universal skills CLI and full-depth discovery. If a same-name skill was modified locally, stop and report the conflict before replacing it. Then verify all six names with `npx skills list -g --json` and tell me the exact invocation syntax for this agent.
 ```
 
 ## Deterministic command

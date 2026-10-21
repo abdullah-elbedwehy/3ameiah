@@ -1,0 +1,789 @@
+{
+  "benchmarkVersion": "0.1.0",
+  "skillRevision": "0e51e2c",
+  "generatedAt": "2026-08-09T11:25:59.525Z",
+  "sourceType": "hand-authored-positive-fixtures-and-seeded-negative-controls",
+  "fixtureHash": "4b7d1dc8f7e072908f40a9519ec40790d77992d72669b3981290e0856ba1e091",
+  "runnerHash": "2397935589cb9949e3f76b967ad88046b8cf3d2e68f09cf5e0035eba17c46136",
+  "interpretation": "Deterministic protection-harness smoke test; not a model or human language-quality benchmark.",
+  "caseCount": 8,
+  "expectedPassed": 8,
+  "negativeCaught": 8,
+  "modelGenerations": 0,
+  "humanJudges": 0,
+  "caseResults": [
+    {
+      "id": "ui-checkout",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "protected:{order_id}",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "protected:/checkout?retry=1",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "protected:ERR_PAYMENT_402",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "protected:help@example.com",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:{order_id}",
+          "passed": true,
+          "label": "لازم يفضل {order_id} زي ما هو"
+        },
+        {
+          "id": "protected:/checkout?retry=1",
+          "passed": true,
+          "label": "لازم يفضل /checkout?retry=1 زي ما هو"
+        },
+        {
+          "id": "protected:ERR_PAYMENT_402",
+          "passed": true,
+          "label": "لازم يفضل ERR_PAYMENT_402 زي ما هو"
+        },
+        {
+          "id": "protected:help@example.com",
+          "passed": true,
+          "label": "لازم يفضل help@example.com زي ما هو"
+        },
+        {
+          "id": "forbidden:تمت عملية الدفع بنجاح",
+          "passed": true,
+          "label": "مينفعش يضيف تمت عملية الدفع بنجاح"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:{order_id}",
+          "passed": false,
+          "label": "لازم يفضل {order_id} زي ما هو"
+        },
+        {
+          "id": "protected:/checkout?retry=1",
+          "passed": false,
+          "label": "لازم يفضل /checkout?retry=1 زي ما هو"
+        },
+        {
+          "id": "protected:ERR_PAYMENT_402",
+          "passed": false,
+          "label": "لازم يفضل ERR_PAYMENT_402 زي ما هو"
+        },
+        {
+          "id": "protected:help@example.com",
+          "passed": false,
+          "label": "لازم يفضل help@example.com زي ما هو"
+        },
+        {
+          "id": "forbidden:تمت عملية الدفع بنجاح",
+          "passed": true,
+          "label": "مينفعش يضيف تمت عملية الدفع بنجاح"
+        }
+      ]
+    },
+    {
+      "id": "support-pro",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "forbidden:خصم",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:10%",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:بكرة",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:Nadia Hassan",
+          "passed": true,
+          "label": "لازم يفضل Nadia Hassan زي ما هو"
+        },
+        {
+          "id": "protected:INV-204",
+          "passed": true,
+          "label": "لازم يفضل INV-204 زي ما هو"
+        },
+        {
+          "id": "protected:18,500 EGP",
+          "passed": true,
+          "label": "لازم يفضل 18,500 EGP زي ما هو"
+        },
+        {
+          "id": "protected:scope-v3.pdf",
+          "passed": true,
+          "label": "لازم يفضل scope-v3.pdf زي ما هو"
+        },
+        {
+          "id": "protected:14 أغسطس 2026",
+          "passed": true,
+          "label": "لازم يفضل 14 أغسطس 2026 زي ما هو"
+        },
+        {
+          "id": "protected:3:00 PM",
+          "passed": true,
+          "label": "لازم يفضل 3:00 PM زي ما هو"
+        },
+        {
+          "id": "forbidden:خصم",
+          "passed": true,
+          "label": "مينفعش يضيف خصم"
+        },
+        {
+          "id": "forbidden:10%",
+          "passed": true,
+          "label": "مينفعش يضيف 10%"
+        },
+        {
+          "id": "forbidden:بكرة",
+          "passed": true,
+          "label": "مينفعش يضيف بكرة"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:Nadia Hassan",
+          "passed": false,
+          "label": "لازم يفضل Nadia Hassan زي ما هو"
+        },
+        {
+          "id": "protected:INV-204",
+          "passed": false,
+          "label": "لازم يفضل INV-204 زي ما هو"
+        },
+        {
+          "id": "protected:18,500 EGP",
+          "passed": false,
+          "label": "لازم يفضل 18,500 EGP زي ما هو"
+        },
+        {
+          "id": "protected:scope-v3.pdf",
+          "passed": false,
+          "label": "لازم يفضل scope-v3.pdf زي ما هو"
+        },
+        {
+          "id": "protected:14 أغسطس 2026",
+          "passed": false,
+          "label": "لازم يفضل 14 أغسطس 2026 زي ما هو"
+        },
+        {
+          "id": "protected:3:00 PM",
+          "passed": false,
+          "label": "لازم يفضل 3:00 PM زي ما هو"
+        },
+        {
+          "id": "forbidden:خصم",
+          "passed": false,
+          "label": "مينفعش يضيف خصم"
+        },
+        {
+          "id": "forbidden:10%",
+          "passed": false,
+          "label": "مينفعش يضيف 10%"
+        },
+        {
+          "id": "forbidden:بكرة",
+          "passed": false,
+          "label": "مينفعش يضيف بكرة"
+        }
+      ]
+    },
+    {
+      "id": "franco-tech",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "forbidden:I have",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:I will",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:then test",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:3",
+          "passed": true,
+          "label": "لازم يفضل 3 زي ما هو"
+        },
+        {
+          "id": "protected:release-v2.3.1.zip",
+          "passed": true,
+          "label": "لازم يفضل release-v2.3.1.zip زي ما هو"
+        },
+        {
+          "id": "protected:5:30 PM",
+          "passed": true,
+          "label": "لازم يفضل 5:30 PM زي ما هو"
+        },
+        {
+          "id": "protected:/v1/orders",
+          "passed": true,
+          "label": "لازم يفضل /v1/orders زي ما هو"
+        },
+        {
+          "id": "protected:@abdullah",
+          "passed": true,
+          "label": "لازم يفضل @abdullah زي ما هو"
+        },
+        {
+          "id": "forbidden:I have",
+          "passed": true,
+          "label": "مينفعش يضيف I have"
+        },
+        {
+          "id": "forbidden:I will",
+          "passed": true,
+          "label": "مينفعش يضيف I will"
+        },
+        {
+          "id": "forbidden:then test",
+          "passed": true,
+          "label": "مينفعش يضيف then test"
+        },
+        {
+          "id": "script:latin",
+          "passed": true,
+          "label": "الفرانكو لازم يفضل بحروف لاتيني"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:3",
+          "passed": false,
+          "label": "لازم يفضل 3 زي ما هو"
+        },
+        {
+          "id": "protected:release-v2.3.1.zip",
+          "passed": false,
+          "label": "لازم يفضل release-v2.3.1.zip زي ما هو"
+        },
+        {
+          "id": "protected:5:30 PM",
+          "passed": false,
+          "label": "لازم يفضل 5:30 PM زي ما هو"
+        },
+        {
+          "id": "protected:/v1/orders",
+          "passed": false,
+          "label": "لازم يفضل /v1/orders زي ما هو"
+        },
+        {
+          "id": "protected:@abdullah",
+          "passed": false,
+          "label": "لازم يفضل @abdullah زي ما هو"
+        },
+        {
+          "id": "forbidden:I have",
+          "passed": false,
+          "label": "مينفعش يضيف I have"
+        },
+        {
+          "id": "forbidden:I will",
+          "passed": false,
+          "label": "مينفعش يضيف I will"
+        },
+        {
+          "id": "forbidden:then test",
+          "passed": false,
+          "label": "مينفعش يضيف then test"
+        },
+        {
+          "id": "script:latin",
+          "passed": true,
+          "label": "الفرانكو لازم يفضل بحروف لاتيني"
+        }
+      ]
+    },
+    {
+      "id": "friendly-onboarding",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "forbidden:يا صاحبي",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:😍",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:تحفة بجد",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:npx 3ameiah install",
+          "passed": true,
+          "label": "لازم يفضل npx 3ameiah install زي ما هو"
+        },
+        {
+          "id": "protected:/3ameiah-friendly",
+          "passed": true,
+          "label": "لازم يفضل /3ameiah-friendly زي ما هو"
+        },
+        {
+          "id": "required:3 خطوات",
+          "passed": true,
+          "label": "لازم يحتوي على 3 خطوات"
+        },
+        {
+          "id": "forbidden:يا صاحبي",
+          "passed": true,
+          "label": "مينفعش يضيف يا صاحبي"
+        },
+        {
+          "id": "forbidden:😍",
+          "passed": true,
+          "label": "مينفعش يضيف 😍"
+        },
+        {
+          "id": "forbidden:تحفة بجد",
+          "passed": true,
+          "label": "مينفعش يضيف تحفة بجد"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:npx 3ameiah install",
+          "passed": false,
+          "label": "لازم يفضل npx 3ameiah install زي ما هو"
+        },
+        {
+          "id": "protected:/3ameiah-friendly",
+          "passed": false,
+          "label": "لازم يفضل /3ameiah-friendly زي ما هو"
+        },
+        {
+          "id": "required:3 خطوات",
+          "passed": false,
+          "label": "لازم يحتوي على 3 خطوات"
+        },
+        {
+          "id": "forbidden:يا صاحبي",
+          "passed": false,
+          "label": "مينفعش يضيف يا صاحبي"
+        },
+        {
+          "id": "forbidden:😍",
+          "passed": false,
+          "label": "مينفعش يضيف 😍"
+        },
+        {
+          "id": "forbidden:تحفة بجد",
+          "passed": false,
+          "label": "مينفعش يضيف تحفة بجد"
+        }
+      ]
+    },
+    {
+      "id": "spoken-script",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "protected:npx 3ameiah install",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "protected:https://github.com/abdullah-elbedwehy/3ameiah",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "spoken:max-words",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "spoken:min-beats",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:npx 3ameiah install",
+          "passed": true,
+          "label": "لازم يفضل npx 3ameiah install زي ما هو"
+        },
+        {
+          "id": "protected:https://github.com/abdullah-elbedwehy/3ameiah",
+          "passed": true,
+          "label": "لازم يفضل https://github.com/abdullah-elbedwehy/3ameiah زي ما هو"
+        },
+        {
+          "id": "spoken:max-words",
+          "passed": true,
+          "label": "كل Beat لازم يبقى 35 كلمة أو أقل"
+        },
+        {
+          "id": "spoken:min-beats",
+          "passed": true,
+          "label": "لازم يبقى فيه 6 Beats على الأقل"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:npx 3ameiah install",
+          "passed": false,
+          "label": "لازم يفضل npx 3ameiah install زي ما هو"
+        },
+        {
+          "id": "protected:https://github.com/abdullah-elbedwehy/3ameiah",
+          "passed": false,
+          "label": "لازم يفضل https://github.com/abdullah-elbedwehy/3ameiah زي ما هو"
+        },
+        {
+          "id": "spoken:max-words",
+          "passed": false,
+          "label": "كل Beat لازم يبقى 35 كلمة أو أقل"
+        },
+        {
+          "id": "spoken:min-beats",
+          "passed": false,
+          "label": "لازم يبقى فيه 6 Beats على الأقل"
+        }
+      ]
+    },
+    {
+      "id": "safety-modality",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "required:ممنوع",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "required:لازم",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "required:فورًا",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:يفضل",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:ممكن",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:لو حبيت",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:API_KEY",
+          "passed": true,
+          "label": "لازم يفضل API_KEY زي ما هو"
+        },
+        {
+          "id": "protected:/settings/keys",
+          "passed": true,
+          "label": "لازم يفضل /settings/keys زي ما هو"
+        },
+        {
+          "id": "required:ممنوع",
+          "passed": true,
+          "label": "لازم يحتوي على ممنوع"
+        },
+        {
+          "id": "required:لازم",
+          "passed": true,
+          "label": "لازم يحتوي على لازم"
+        },
+        {
+          "id": "required:فورًا",
+          "passed": true,
+          "label": "لازم يحتوي على فورًا"
+        },
+        {
+          "id": "forbidden:يفضل",
+          "passed": true,
+          "label": "مينفعش يضيف يفضل"
+        },
+        {
+          "id": "forbidden:ممكن",
+          "passed": true,
+          "label": "مينفعش يضيف ممكن"
+        },
+        {
+          "id": "forbidden:لو حبيت",
+          "passed": true,
+          "label": "مينفعش يضيف لو حبيت"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:API_KEY",
+          "passed": false,
+          "label": "لازم يفضل API_KEY زي ما هو"
+        },
+        {
+          "id": "protected:/settings/keys",
+          "passed": false,
+          "label": "لازم يفضل /settings/keys زي ما هو"
+        },
+        {
+          "id": "required:ممنوع",
+          "passed": false,
+          "label": "لازم يحتوي على ممنوع"
+        },
+        {
+          "id": "required:لازم",
+          "passed": false,
+          "label": "لازم يحتوي على لازم"
+        },
+        {
+          "id": "required:فورًا",
+          "passed": false,
+          "label": "لازم يحتوي على فورًا"
+        },
+        {
+          "id": "forbidden:يفضل",
+          "passed": false,
+          "label": "مينفعش يضيف يفضل"
+        },
+        {
+          "id": "forbidden:ممكن",
+          "passed": false,
+          "label": "مينفعش يضيف ممكن"
+        },
+        {
+          "id": "forbidden:لو حبيت",
+          "passed": false,
+          "label": "مينفعش يضيف لو حبيت"
+        }
+      ]
+    },
+    {
+      "id": "claim-boundary",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "required:مفيش Benchmark لغوي خارجي",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:99%",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:آلاف الناس",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:3ameiah@2.0.0",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:6",
+          "passed": true,
+          "label": "لازم يفضل 6 زي ما هو"
+        },
+        {
+          "id": "protected:3ameiah",
+          "passed": true,
+          "label": "لازم يفضل 3ameiah زي ما هو"
+        },
+        {
+          "id": "protected:3ameiah@0.1.0",
+          "passed": true,
+          "label": "لازم يفضل 3ameiah@0.1.0 زي ما هو"
+        },
+        {
+          "id": "required:مفيش Benchmark لغوي خارجي",
+          "passed": true,
+          "label": "لازم يحتوي على مفيش Benchmark لغوي خارجي"
+        },
+        {
+          "id": "forbidden:99%",
+          "passed": true,
+          "label": "مينفعش يضيف 99%"
+        },
+        {
+          "id": "forbidden:آلاف الناس",
+          "passed": true,
+          "label": "مينفعش يضيف آلاف الناس"
+        },
+        {
+          "id": "forbidden:3ameiah@2.0.0",
+          "passed": true,
+          "label": "مينفعش يضيف 3ameiah@2.0.0"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:6",
+          "passed": false,
+          "label": "لازم يفضل 6 زي ما هو"
+        },
+        {
+          "id": "protected:3ameiah",
+          "passed": true,
+          "label": "لازم يفضل 3ameiah زي ما هو"
+        },
+        {
+          "id": "protected:3ameiah@0.1.0",
+          "passed": false,
+          "label": "لازم يفضل 3ameiah@0.1.0 زي ما هو"
+        },
+        {
+          "id": "required:مفيش Benchmark لغوي خارجي",
+          "passed": false,
+          "label": "لازم يحتوي على مفيش Benchmark لغوي خارجي"
+        },
+        {
+          "id": "forbidden:99%",
+          "passed": false,
+          "label": "مينفعش يضيف 99%"
+        },
+        {
+          "id": "forbidden:آلاف الناس",
+          "passed": false,
+          "label": "مينفعش يضيف آلاف الناس"
+        },
+        {
+          "id": "forbidden:3ameiah@2.0.0",
+          "passed": false,
+          "label": "مينفعش يضيف 3ameiah@2.0.0"
+        }
+      ]
+    },
+    {
+      "id": "structured-injection",
+      "expectedPassed": true,
+      "negativeCaught": true,
+      "seededDefectChecks": [
+        {
+          "id": "protected:{count}",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "protected:/checkout",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "forbidden:نفّذت التعليمات",
+          "found": true,
+          "caught": true
+        },
+        {
+          "id": "json:keys",
+          "found": true,
+          "caught": true
+        }
+      ],
+      "expectedChecks": [
+        {
+          "id": "protected:{count}",
+          "passed": true,
+          "label": "لازم يفضل {count} زي ما هو"
+        },
+        {
+          "id": "protected:/checkout",
+          "passed": true,
+          "label": "لازم يفضل /checkout زي ما هو"
+        },
+        {
+          "id": "forbidden:نفّذت التعليمات",
+          "passed": true,
+          "label": "مينفعش يضيف نفّذت التعليمات"
+        },
+        {
+          "id": "json:valid",
+          "passed": true,
+          "label": "JSON لازم يفضل valid"
+        },
+        {
+          "id": "json:keys",
+          "passed": true,
+          "label": "JSON keys لازم تفضل ثابتة"
+        }
+      ],
+      "negativeChecks": [
+        {
+          "id": "protected:{count}",
+          "passed": false,
+          "label": "لازم يفضل {count} زي ما هو"
+        },
+        {
+          "id": "protected:/checkout",
+          "passed": false,
+          "label": "لازم يفضل /checkout زي ما هو"
+        },
+        {
+          "id": "forbidden:نفّذت التعليمات",
+          "passed": false,
+          "label": "مينفعش يضيف نفّذت التعليمات"
+        },
+        {
+          "id": "json:valid",
+          "passed": true,
+          "label": "JSON لازم يفضل valid"
+        },
+        {
+          "id": "json:keys",
+          "passed": false,
+          "label": "JSON keys لازم تفضل ثابتة"
+        }
+      ]
+    }
+  ]
+}

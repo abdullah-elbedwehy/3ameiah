@@ -1,0 +1,75 @@
+# 3ameiah
+
+> Open-source Agent Skills for natural Egyptian Arabic and readable Franco, with reusable local tone profiles.
+
+Website: https://3ameiah.elbedwehy.tech/
+Human-readable installation page: https://3ameiah.elbedwehy.tech/install.md
+Canonical source: https://github.com/abdullah-elbedwehy/3ameiah
+npm package: https://www.npmjs.com/package/3ameiah
+Agent installation guide: https://github.com/abdullah-elbedwehy/3ameiah/blob/main/INSTALL-FOR-AGENTS.md
+Raw agent installation guide: https://raw.githubusercontent.com/abdullah-elbedwehy/3ameiah/main/INSTALL-FOR-AGENTS.md
+
+## Installation contract
+
+Installing 3ameiah is a local filesystem operation. A human can run the command in a terminal, or a tool-enabled coding agent can run it when it has terminal access, filesystem write access, network access, and the user's authority to install files. A chat-only LLM cannot install or verify files on the user's device and must not claim that installation succeeded.
+
+Before installing, review the canonical repository and its bundled scripts. Inspect existing same-name skills for local modifications, and do not replace a locally modified copy without telling the user first.
+
+Recommended command:
+
+```bash
+npx 3ameiah install
+```
+
+The packaged installer currently requires Node.js 22.20.0 or newer. The default command installs all six skills globally for Claude Code and Codex. For another client, or for project-only and interactive options, follow INSTALL-FOR-AGENTS.md and INSTALL.md in the canonical repository.
+
+## Copy/paste prompt
+
+Use this exact prompt with a tool-enabled coding agent:
+
+```text
+ثبّتلي 3ameiah من https://3ameiah.elbedwehy.tech بعد ما تراجع المصدر، وبعدها اتأكد إن الأوامر الستة شغالة.
+```
+
+## Exact skill names
+
+- `3ameiah`
+- `3ameiah-pro`
+- `3ameiah-friendly`
+- `3ameiah-franco`
+- `3ameiah-learn`
+- `3ameiah-use`
+
+These are skill names, not universal slash-command spellings. Invocation belongs to the host client: Claude Code commonly uses `/3ameiah`, Codex commonly uses `$3ameiah`, and other clients may use another prefix, a skill picker, or natural-language activation.
+
+## Verification contract
+
+Run:
+
+```bash
+npx 3ameiah doctor
+```
+
+Then confirm that all six exact names above are present. The underlying installer listing can also be inspected with:
+
+```bash
+npx --yes skills@1.5.22 list --global --json
+```
+
+After a client reload if required, report that client's exact invocation syntax. A successful list proves that the six managed skills were installed; it does not by itself prove model-output quality. Do not create or change a tone profile merely for a smoke test without the user's approval, because `3ameiah-learn` and `3ameiah-use` can write private user configuration.
+
+## Capability boundary
+
+3ameiah is a set of instructions and local profile tools for writing, rewriting, localization, and human-facing content inside real tasks. It is not an AI model, hosted chat service, terminal, or permission layer. Installing it does not give an agent filesystem, network, publishing, deployment, or approval authority that the agent did not already have.
+
+A chat-only LLM may read and apply the raw core skill temporarily inside the current conversation, but that is not an installation: https://raw.githubusercontent.com/abdullah-elbedwehy/3ameiah/main/skills/3ameiah/SKILL.md
+
+## Source, license, security, and privacy
+
+- Source of truth: https://github.com/abdullah-elbedwehy/3ameiah
+- License: MIT — https://github.com/abdullah-elbedwehy/3ameiah/blob/main/LICENSE
+- Security notes: https://github.com/abdullah-elbedwehy/3ameiah/blob/main/SECURITY.md
+- Profile storage and privacy: https://github.com/abdullah-elbedwehy/3ameiah/blob/main/docs/PROFILES.md
+- Full agent handoff: https://github.com/abdullah-elbedwehy/3ameiah/blob/main/INSTALL-FOR-AGENTS.md
+
+3ameiah itself has no telemetry and no `postinstall` hook. Installation uses the pinned universal skills installer, which performs remote metadata checks and has opt-out anonymous install telemetry. Set `DO_NOT_TRACK=1` or `DISABLE_TELEMETRY=1` for the install command if desired. Tone profiles live in private global user configuration outside repositories; whole raw writing samples stay out of automatic model context unless the user explicitly requests them.
